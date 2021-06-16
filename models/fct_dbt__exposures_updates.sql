@@ -48,7 +48,8 @@ exposures_updates as (
         e.owner,
         e.maturity,
         e.package_name,
-        e.output_feeds,
+        e.depends_on_nodes,
+        e.depends_on_sources,
         latest_update as feed_latest_update
     from exposures_latest e
     left join model_updates m
