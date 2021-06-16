@@ -31,9 +31,9 @@ exposures_latest as (
         owner,
         maturity,
         package_name,
-        depends_on_nodes,
-        depends_on_sources
-    from exposures_record
+        f.value::string as output_feeds
+    from exposures_record t,
+      lateral flatten(input => depends_on_nodes) f
     where artifact_generated_at = (select max(artifact_generated_at) from exposures_record)
 
 ),
@@ -48,8 +48,7 @@ exposures_updates as (
         e.owner,
         e.maturity,
         e.package_name,
-        e.depends_on_nodes,
-        e.depends_on_sources,
+        e.output_feeds,
         latest_update as feed_latest_update
     from exposures_latest e
     left join model_updates m
