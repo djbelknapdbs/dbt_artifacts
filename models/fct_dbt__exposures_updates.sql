@@ -31,7 +31,8 @@ exposures_latest as (
         owner,
         maturity,
         package_name,
-        output_feeds
+        depends_on_nodes,
+        depends_on_sources
     from exposures_record
     where artifact_generated_at = (select max(artifact_generated_at) from exposures_record)
 
