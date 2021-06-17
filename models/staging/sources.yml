@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: dbt_artifacts
     database: "{{ var('dbt_artifacts_database', target.database) }}"
-    schema: "{{ var('dbt_artifacts_schema', 'dbt_artifacts') }}"
+    schema: "{{ var('dbt_artifacts_schema', target.schema) }}"
     tables:
       - name: artifacts
         identifier: "{{ var('dbt_artifacts_table', 'artifacts') }}"
