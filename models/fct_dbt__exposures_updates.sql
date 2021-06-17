@@ -31,8 +31,9 @@ exposures_latest as (
         owner,
         maturity,
         package_name,
-        output_feeds
-    from exposures_record
+        f.value::string as output_feeds
+    from exposures_record t,
+      lateral flatten(input => depends_on_nodes) f
     where artifact_generated_at = (select max(artifact_generated_at) from exposures_record)
 
 ),

@@ -26,18 +26,18 @@ dbt_models_incremental as (
 fields as (
 
      select 
-        t.manifest_model_id,
-        t.command_invocation_id,
-        t.artifact_generated_at,
-        t.node_id,
-        t.name,
-        t.type,
-        t.owner,
-        t.maturity,
-        f.value::string as output_feeds,
-        t.package_name
-    from dbt_models_incremental t,
-    lateral flatten(input => depends_on_nodes) f
+        manifest_model_id,
+        command_invocation_id,
+        artifact_generated_at,
+        node_id,
+        name,
+        type,
+        owner,
+        maturity,
+        depends_on_nodes,
+        depends_on_sources,
+        package_name
+    from dbt_models_incremental
 
 )
 
