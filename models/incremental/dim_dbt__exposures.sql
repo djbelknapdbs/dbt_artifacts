@@ -25,6 +25,7 @@ dbt_models_incremental as (
 
 fields as (
 
+<<<<<<< HEAD
      select
         t.manifest_model_id,
         t.command_invocation_id,
@@ -39,6 +40,21 @@ fields as (
         t.package_name
     from dbt_models_incremental as t,
     lateral flatten(input => depends_on_nodes) as f
+=======
+     select 
+        manifest_model_id,
+        command_invocation_id,
+        artifact_generated_at,
+        node_id,
+        name,
+        type,
+        owner,
+        maturity,
+        depends_on_nodes,
+        depends_on_sources,
+        package_name
+    from dbt_models_incremental
+>>>>>>> 5a6836ac8b0db1b7e51a2fa99a3295813aa27a89
 
 )
 
